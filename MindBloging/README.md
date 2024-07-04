@@ -77,3 +77,6 @@ while retrieving post based upon the status using getPost() method we have to wr
 For more Queries :https://appwrite.io/docs/products/databases/queries
 
 
+# STEP-5️⃣
+Here State management is done  by using Redux Toolkit,and make the basic outlet in App.jsx and configure provider.
+Configure the store to manage the states. 
