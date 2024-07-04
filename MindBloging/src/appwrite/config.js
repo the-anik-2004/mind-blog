@@ -57,7 +57,66 @@ export class DBservice{
     }
  }
 
-}
+ async getPost(slug){
+    try {
+        return await this.databases.getDocument(
+            confEnv.appwriteDatabaseId,
+            confEnv.appwriteCollectionId,
+            slug
+        );
+    } catch (error) {
+        console.log("Appwrite Service :: getPost :: error",error);
+        return false;
+    }
+ }
+
+ async getPosts(queries=[
+    Query.equal("status","active")
+ ]){
+
+    try {
+        return await this.databases.listDocuments(
+            confEnv.appwriteDatabaseId,
+            confEnv.appwriteCollectionId,
+            queries,
+        )
+    } catch (error) {
+        console.log("Appwrite service :: getPosts :: error",error);
+        return false;
+    }
+ }
+
+ //file upload service
+
+ async uploadFile(file){
+    try {
+        return await this.storage.createFile(
+            confEnv.appwriteBucketId,
+            ID.unique(),
+            file
+        )
+    } catch (error) {
+        console.log("appwrite service:: uploadFile :: error",error);
+        return false;
+    }
+ }
+
+ async deleteFile(fileId){
+    try {
+        await this.storage.deleteFile(confEnv.appwriteBucketId,fileId);
+        return true;
+    } catch (error) {
+        console.log("appwrite service :: deletefile ::error",error);
+        return false;
+    }
+ }
+
+
+ getFilePreview(fileId){
+    return this.storage.getFilePreview(confEnv.appwriteBucketId,fileId);
+ }//Here we don't use async await because the response time of get file preview method is very fast so there is no need to use async await
+
+}//https://appwrite.io/docs/references/cloud/client-web/databases
 
 const dbservice=new DBservice();
 export default dbservice;

@@ -39,8 +39,36 @@ All the required environment variables are defined in (.env.sample)
 # STEP-3️⃣
 Here Services are made for 'CreateUser','login','logout', 'getUser' by making a structure of Class and each time a new user is created or registered an instance of that class is created as a object. 
 
-path: (src/appwrite/auth.js)
+Path: (src/appwrite/auth.js)
 
 For more info check out: https://appwrite.io/docs/products/auth
+
+
+# STEP-4️⃣
+Here we configure the appwrite service databases like 'createPost','updatePost','deletePost','getPost' and file uploading services like 'uploadFile','deleteFile','getPreviewFile'. 
+
+Path: (src/appwrite/config.js)
+
+For more info check out://appwrite.io/docs/references/cloud/client-web/databases
+
+while retrieving post based upon the status using getPost() method we have to write query:
+```
+ async getPosts(queries=[
+    Query.equal("status","active")
+ ]){
+     try {
+        return await this.databases.listDocuments(
+            confEnv.appwriteDatabaseId,
+            confEnv.appwriteCollectionId,
+            queries,
+        )
+    } catch (error) {
+        console.log("Appwrite service :: getPosts :: error",error);
+        return false;
+    }
+ }
+```
+
+For more Queries :https://appwrite.io/docs/products/databases/queries
 
 
