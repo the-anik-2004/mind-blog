@@ -52,7 +52,9 @@ Path: (src/appwrite/config.js)
 For more info check out://appwrite.io/docs/references/cloud/client-web/databases
 
 while retrieving post based upon the status using getPost() method we have to write query:
-```
+
+```markdown
+```javascript
  async getPosts(queries=[
     Query.equal("status","active")
  ]){
@@ -67,6 +69,7 @@ while retrieving post based upon the status using getPost() method we have to wr
         return false;
     }
  }
+```
 ```
 
 For more Queries :https://appwrite.io/docs/products/databases/queries
