@@ -9,24 +9,38 @@ Currently, two official plugins are available:
 
 ## Steps to be Followed
 
-# Step -1 
- *Environment Variable must be in the Root directory.And it should start with (.) Eg:- .env
+# STEP-1️⃣
+ *Environment Variable must be in the Root directory.And it should start with (.) Eg:-``` .env ```
 
  Env file load only once usally ,so whenver you have update in env file you have close the project once then reopen the project.
 
  To prevent accidentally leaking env variables to the client, only variables prefixed with 'VITE_' are exposed to your Vite-processed code. e.g. for the following env variables:
-
+```
  VITE_SOME_KEY=123
-DB_PASSWORD=foobar
-
+ DB_PASSWORD=foobar
+```
 ACCESS:
 Only VITE_SOME_KEY will be exposed as 'import.meta.env.VITE_SOME_KEY' to your client source code, but DB_PASSWORD will not.
 
+```
 console.log(import.meta.env.VITE_SOME_KEY) // "123"
 console.log(import.meta.env.DB_PASSWORD) // undefined
+```
 
-# STEP 2
+
+# STEP-2️⃣
 TAKE all the environment variables from the Backend as a service(here AppWrite)
 
-create a seperate folder as config and store all the env variable in an object by stringfying them...it is good practise
+create a seperate folder as config and store all the env variable in an object by stringfying them...it is good practice and as well as to hide the sensitive info.
+
+All the required environment variables are defined in (.env.sample)
+
+
+# STEP-3️⃣
+Here Services are made for 'CreateUser','login','logout', 'getUser' by making a structure of Class and each time a new user is created or registered an instance of that class is created as a object. 
+
+path: (src/appwrite/auth.js)
+
+For more info check out: https://appwrite.io/docs/products/auth
+
 
