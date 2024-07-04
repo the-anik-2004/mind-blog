@@ -69,7 +69,7 @@ while retrieving post based upon the status using getPost() method we have to wr
         return false;
     }
  }
-```
+``````
 
 For more Queries :https://appwrite.io/docs/products/databases/queries
 
