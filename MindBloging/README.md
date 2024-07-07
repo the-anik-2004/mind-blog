@@ -90,7 +90,7 @@ In this given below syntax {value && ()}
 if 'value' is 'true' then only the part in () is valid or redered further.
 
 ```markdown
-```javascript
+```javascript 
     {authStatus && (  <li><LogoutBtn/></li>  )} //if authService is   'true' then the list tag and LogoutBtn is visble
 ```
 
@@ -140,4 +140,80 @@ if 'value' is 'true' then only the part in () is valid or redered further.
             <Input className='xyz' type='xyz' />
             </div>)
     });
+
+    //Syntax -3 [While exporting]
+    function Input({})
+    { 
+        return (
+           <div>
+            <Input className='xyz' type='xyz' />
+            </div>)
+    };
+
+    export default React.forwardRef(Input); 
  ```
+
+## Select Component:
+```Markdown
+```javascript
+import React,{useId} from 'react'
+
+function Select({
+    options,label,className='',...props
+},ref) {
+    const id=useId();
+    return (
+        <div className='w-full'>
+            {label && 
+            (<label htmlFor={id} className={`${className}`}> </label>)}
+
+            <select {...props} id={id} ref={ref} className={`${className}`}>
+                {options?.map((option)=>{
+                    <option key={option} value={option}>
+                        {option}
+                    </option>
+                })}
+            </select>
+        </div>
+    )
+}
+
+export default React.forwardRef(Select);
+
+```
+
+## STEP-7️⃣ 
+Here Login and signup page is made using 'React-hook-form' [ https://www.react-hook-form.com/get-started/#SchemaValidation ].
+
+Work based upon 'useForm()' which have 'register' and 'handleSubmit'.'handleSubmit' is method which is used to run your custom method when even submit is done.
+
+```Markdown
+```javascript
+    <form onSubmit={handleSubmit (login)}>
+
+    <Input/>
+
+     <Button type="submit" className="w-full">Sign In</Button>
+
+    </form>
+```
+
+
+
+Have knowledge about schemaValidation,applyValidation also have deep dived into vlidation part by using regular expression(RegEx) in register...
+```markdown
+```javascript
+     <Input
+        label='Email :'
+        placeholder='Enter your Email...'
+        type='email'
+        {...register("email",{
+                            required:true,
+                            validate:{
+                                    matchPatter:(value)=>/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)||
+                                    "Email address must be a valid address",
+                                }
+                            }
+                    )
+        }/>
+```
