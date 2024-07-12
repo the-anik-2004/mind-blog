@@ -402,3 +402,9 @@ function PostFrom({post}) {
 export default PostFrom
 
 ```
+
+## STEP-1️⃣1️⃣
+Here all the required pages are built using the components.The pages are like -Home ,AddPost,EditPost etc.
+
+
+Path: MindBlog/src/pages

@@ -8,6 +8,10 @@ import Input from './Input';
 import Select from "./Select";
 import PostCard from "./PostCard";
 import RTE from "./RTE";
+import Signup from './Signup'
+import Login from './Login'
+import PostFrom from "./post-form/PostFrom";
+
 
 export default {
     Header,
@@ -15,6 +19,8 @@ export default {
     Container,
     Logo,
     LogoutBtn,Button,
-    Input,Select,PostCard,RTE
+    Input,Select,PostCard,RTE,
+    Signup,Login,PostFrom
+    
 
 };
