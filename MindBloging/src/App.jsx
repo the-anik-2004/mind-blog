@@ -29,7 +29,7 @@ function App() {
     <div className='w-full black'>
       <Header/>
       <main>
-      TODO:  {/*<Outlet/> */}
+        <Outlet/> 
       </main>
       <Footer/>
     </div>

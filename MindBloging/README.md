@@ -408,3 +408,98 @@ Here all the required pages are built using the components.The pages are like -H
 
 
 Path: MindBlog/src/pages
+
+## STEP-1️⃣2️⃣
+Here all the routing are being made to navigate from a page to another page by using react-router.
+
+```md
+```javascript
+import React, { Children } from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+import { Provider } from 'react-redux';
+import store from './store/store.js';
+import {AuthLayout,Login } from './Components'
+import { RouterProvider,createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import AddPost from "./pages/AddPost.jsx";
+import Signup from './pages/Signup.jsx'
+import EditPost from "./pages/EditPost.jsx";
+import Post from "./pages/Post.jsx";
+import AllPosts from "./pages/AllPosts.jsx";
+
+const router=createBrowserRouter([
+  {
+    path:'/',
+    element:<App/>,
+    children:[
+                {
+                  path:'/',
+                  element:<Home/>
+                },
+                {
+                  path:'/login',
+                  element:(
+                    <AuthLayout authentication={false}>
+                        <Login/>
+                    </AuthLayout>
+                  )
+                },
+                {
+                  path:'/signup',
+                  element:(
+                    <AuthLayout authentication={false}>
+                        <Signup/>
+                    </AuthLayout>
+                  )
+                },
+                {
+                  path:'/all-posts',
+                  element:(
+                    <AuthLayout authentication>
+                        {" "}
+                        <AllPosts/>
+                    </AuthLayout>
+                  )
+                },
+                {
+                  path:'/add-post',
+                  element:(
+                    <AuthLayout authentication>
+                        {" "}
+                        <AddPost/>
+                    </AuthLayout>
+                  )
+                },
+                {
+                  path:'/edit-post:slug',
+                  element:(
+                    <AuthLayout authentication>
+                        {" "}
+                        <EditPost/>
+                    </AuthLayout>
+                  )
+                },
+                {
+                  path:'/post/:slug',
+                  element:<Post/>
+                },
+            ],
+  },
+])
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Provider store={store}>
+    <RouterProvider router={router} />
+    </Provider>
+    
+  </React.StrictMode>,
+)
+
+```
+
+## STEP-1️⃣3️⃣
+
+Here we debug the codebase and after that deploy it.

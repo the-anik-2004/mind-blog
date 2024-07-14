@@ -36,7 +36,7 @@ function Login() {
                         </span>
                     </div>
                     <h2 className='text-center text-2xl font-bold leading-tight'>
-                        Sign in to your account</h2>
+                       Log in to your account</h2>
 
                     <p className="mt-2 text-center text-base text-black/60">
                         Don&apos;t have an account?&nbsp;
@@ -70,7 +70,7 @@ function Login() {
 
                             <Button
                             type="submit" className="w-full"
-                            >Sign In</Button>
+                            >Log In</Button>
                         </div>
                     </form>
                 </div>
