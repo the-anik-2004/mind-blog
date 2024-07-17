@@ -4,6 +4,7 @@ import appwriteService from '../appwrite/config'
 import {Button,Container} from '../Components'
 import parse from 'html-react-parser';
 import { useSelector } from 'react-redux';
+// import {RTE} from '../Components'
 
 
 // const extractTextFromElements = (elements) => {
@@ -78,9 +79,16 @@ function Post() {
     const handleChange=(e)=>{
         setFormData({
             ...formData,
-            [e.target.name]: e.target.content
+            [e.target.name]: e.target.value
         });
     }
+
+    // const handleEditorChange=(e)=>{
+    //     setFormData({
+    //         ...formData,
+    //         content
+    //     });
+    // }
     return post ? (
         <div className="py-8">
             <Container>
@@ -112,14 +120,7 @@ function Post() {
                                 </Button>
                             </>
                             )}
-                            {/* <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3" >
-                                    Edit
-                                </Button>
-                            </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
-                            </Button> */}
+                           
                         </div>
                     )}
                 </div>
@@ -140,11 +141,14 @@ function Post() {
                                 className="w-full p-4 "
                                 rows="10"
                             />
+                {/* <RTE label="Content :"
+                name="content" control={control} defaultValues={getValues("content")}/> */}
+                            
                         </>
                     ):(
                         <>
                             <h1 className="text-2xl font-bold">{post.title}</h1>
-                            <div className="browser-css ">{parse(post.content)}</div>
+                            <div className="browser-css ">{parse(formData.content)}</div>
                         </>
                     )}
                     {/* <h1 className="text-2xl font-bold">{post.title}</h1>
