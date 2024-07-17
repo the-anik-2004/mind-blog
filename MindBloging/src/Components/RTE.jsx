@@ -10,20 +10,22 @@ function RTE({name,control,label,defaultValue=""}) {
             control={control}
             render={({field:{onChange}})=>(
                 <Editor
+                apiKey='pq4axuvxmzuwwk0ev2z7v70vi9jb681xmrwpjba8n175h6nq'
                 initialValue={defaultValue}
                 init={
-                    {
+                    {   initialValue: defaultValue,
                         height:500,
-                        menubar:false,
+                        menubar:true,
                         plugins:[
-                            'advlist autolink lists link image charmap print preview anchor',
-                            'searchreplace visualblocks code fullscreen','insertdatetime media table paste code help wordcount'
-                        ],
+                            "advlist", "autolink", "lists", "link", "image", "charmap", 
+                            "preview", "anchor", "searchreplace", "visualblocks", "code",
+                            "fullscreen", "insertdatetime", "media", "table", "help", "wordcount"
+                         ],
                         toolbar:
-                        'undo redo | formatselect | bold italic underline| \
-                        alignleft aligncenter alignright alignjustify| \
-                        bullist numlist outdent indent |removeformat | help',
-                        content_style:"body {font-family:Helvetica,Arial,san-serif;font-size:14px}"
+                        "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+                        content_style: 
+                        "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                        readonly:false,
                     }
                 }
                 onEditorChange={onChange}

@@ -1,6 +1,6 @@
 import React,{useCallback} from 'react'
 import { useForm } from 'react-hook-form'
-import{Button,Input,Select,RTE} from '../index'
+import {Button,Input,Select,RTE} from '..'
 import service from '../../appwrite/config'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -11,7 +11,8 @@ function PostFrom({post}) {
         setValue,control,getValues}=useForm({
                                              defaultValues:{
                                                  title: post?.title||'',
-                                                 slug:post?.slug||"",
+                                                 slug:post?.$id||"",
+                                                 content:post?.content||"",
                                                  status:post?.status||"active",
                                              }
                                          });
@@ -20,7 +21,7 @@ function PostFrom({post}) {
 
     const submit=async (data)=>{
         if(post){
-            const file=data.image[0]?service.uploadFile(data.image[0]) : null;
+            const file=data.image[0]? await service.uploadFile(data.image[0]) : null;
             if(file){
                 service.deleteFile(post.featuredImage)
             }
@@ -32,7 +33,7 @@ function PostFrom({post}) {
             const file= await service.uploadFile(data.image[0]);
             if(file){
                 const fileId=file.$id;
-                data.featuredImage=file;
+                data.featuredImage=fileId;
                 const dbpost=await service.createPost({...data,userId:userData.$id});
                 if(dbpost){
                     navigate(`/post/${dbpost.$id}`)
@@ -43,9 +44,13 @@ function PostFrom({post}) {
 
     const slugTransform = useCallback((value)=>{
                                                 if(value && typeof value==='string')
-                                                    return value.trim().toLowerCase().replace(/^[a-zA-Z\d]+/g,"-");
+                                                    return value
+                                                .trim()
+                                                .toLowerCase()
+                                                .replace(/[^a-zA-Z\d\s]+/g, "-")
+                                                .replace(/\s/g, "-");
                                                 return '';
-                                            },[])
+                                            },[]);
 
 
     React.useEffect(()=>{
@@ -53,7 +58,7 @@ function PostFrom({post}) {
             if(name==='title'){
                 setValue('slug',slugTransform(value.title),{shouldValidate:true});
             }
-        })
+        });
 
         return ()=>{subscription.unsubscribe()}
     },[watch,slugTransform,setValue]);
@@ -61,48 +66,47 @@ function PostFrom({post}) {
 
     return (
         <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
-            <div className='"w-2/3 pc-2'>
+            <div className='"w-full px-2 '>
                 <Input
                     label="Title :"
-                    placeholder="enter post title"
-                    className="mb-4"
+                    placeholder="Title of the post"
+                    className="w-full"
                     {...register("title",{required:true})}
                 />
                 <Input
                     label="Slug :"
-                    placeholder="slug"
-                    className="mb-4"
-                    {...register('slug',{validate:true})}
+                    placeholder="Slug of the post"
+                    className="w-full mt-2"
+                    {...register('slug',{required:true})}
 
-                    onInput={(e)=>{
-                        setValue('slug',slugTransform(e.currentTarget.value),{
-                            shouldValidate:true});
-                    }}
+                   onInput={(e)=>{
+                    setValue('slug',slugTransform(e.currentTarget.value),{shouldValidate:true});
+                   }}
                 />
-                <RTE label="content :"
+                <RTE label="Content :"
                 name="content" control={control} defaultValues={getValues("content")}/>
             </div>
-            <div className='w-1/3 px-2'>
+            <div className='w-1/3 px-2 mt-4 mx-50'>
                 <Input
-                    label="featured Image"
+                    label="Featured Image"
                     type="file"
-                    className='mb-4'
+                    className='mb-4 '
                     accept="image/png ,image/jpg, image/jpeg, image/gif"
                     {...register('image',{required:!post})}
                 />
 
             </div>
             {post && (
-                <div className='w-full mb-4'>
+                <div className='w-full mb-4 mt-2'>
                     <img src={service.getFilePreview(post.featuredImage)}
                      alt={post.title}
-                     className='rounded-lg' />
+                     className='rounded-lg ' />
                 </div>
             )}
             <Select
-                options={["active","inactive"]}
+                options={["Active","Inactive"]}
                 label="Status"
-                className="mb-4"
+                className="mb-4 mt-2"
                 {...register("status",{required:true})}
             />
 
@@ -110,6 +114,7 @@ function PostFrom({post}) {
             type="submit"
             bgColor={post?"bg-green-500" : undefined}
             className="w-full"
+            
             >
                 {post? "Update" : "Submit"}
                 </Button>
