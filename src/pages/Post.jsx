@@ -4,24 +4,7 @@ import appwriteService from '../appwrite/config'
 import {Button,Container} from '../Components'
 import parse from 'html-react-parser';
 import { useSelector } from 'react-redux';
-// import {RTE} from '../Components'
 
-
-// const extractTextFromElements = (elements) => {
-//     if (typeof elements === 'string') {
-//       return elements;
-//     }
-  
-//     if (Array.isArray(elements)) {
-//       return elements.map(extractTextFromElements).join('');
-//     }
-  
-//     if (typeof elements === 'object' && elements.props) {
-//       return extractTextFromElements(elements.props.children);
-//     }
-  
-//     return '';
-//   };
 
 function Post() {
     const [post,setPost]=useState(null);
@@ -83,12 +66,7 @@ function Post() {
         });
     }
 
-    // const handleEditorChange=(e)=>{
-    //     setFormData({
-    //         ...formData,
-    //         content
-    //     });
-    // }
+ 
     return post ? (
         <div className="py-8">
             <Container>
@@ -141,8 +119,7 @@ function Post() {
                                 className="w-full p-4 "
                                 rows="10"
                             />
-                {/* <RTE label="Content :"
-                name="content" control={control} defaultValues={getValues("content")}/> */}
+
                             
                         </>
                     ):(
