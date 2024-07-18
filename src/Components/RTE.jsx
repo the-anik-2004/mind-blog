@@ -5,6 +5,7 @@ import confEnv from '../config/confEnv';
 
 
 function RTE({name,control,label,defaultValue=""}) {
+    console.log('TinyMCE API Key');
     const apikey=confEnv.tinymceApikey;
     console.log('TinyMCE API Key:', apikey);
     return (
