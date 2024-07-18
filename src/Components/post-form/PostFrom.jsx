@@ -105,7 +105,7 @@ function PostFrom({post}) {
             )}
             <Select
                 options={["Active","Inactive"]}
-                label="Status"
+                label="Status :"
                 className="mb-4 mt-2"
                 {...register("status",{required:true})}
             />
