@@ -6,6 +6,7 @@ import confEnv from '../config/confEnv';
 
 function RTE({name,control,label,defaultValue=""}) {
     const apikey=confEnv.tinymceApikey;
+    console.log('TinyMCE API Key:', apikey);
     return (
         <div className='w-full'>
             {label && (<label  className='inline-block mb-1 pl-1'>{label}</label>)}
