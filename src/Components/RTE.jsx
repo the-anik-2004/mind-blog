@@ -1,8 +1,11 @@
 import React from 'react'
 import {Editor} from '@tinymce/tinymce-react';
 import {Controller} from 'react-hook-form';
+import confEnv from '../config/confEnv';
+
+
 function RTE({name,control,label,defaultValue=""}) {
-    const apikey='pq4axuvxmzuwwk0ev2z7v70vi9jb681xmrwpjba8n175h6nq'
+    const apikey=confEnv.tinymceApikey;
     return (
         <div className='w-full'>
             {label && (<label  className='inline-block mb-1 pl-1'>{label}</label>)}
